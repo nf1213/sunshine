@@ -1,11 +1,13 @@
 package com.example.kitten.sunshine.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 
 public class MainActivity extends ActionBarActivity {
@@ -40,9 +42,29 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_show_location) {
+          showLocation();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showLocation() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String zipcode = preferences.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default));
+        Uri geolocation = Uri.parse("geo:0,0?").buildUpon()
+                .appendQueryParameter("q", zipcode)
+                .build();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geolocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 }
