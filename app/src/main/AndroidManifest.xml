@@ -39,7 +39,7 @@
                 android:value="MainActivity" />
         </activity>
        <provider
-            android:authorities="com.example.android.sunshine.app"
+            android:authorities="com.example.kitten.sunshine.app"
             android:name=".data.WeatherProvider" />
     </application>
 
