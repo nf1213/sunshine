@@ -12,6 +12,7 @@
     <string name="pref_units_key" translatable="false">units</string>
     <string name="pref_units_label">Units</string>
     <string name="pref_units_default" translatable="false">metric</string>
+    <string name="pref_units_imperial" translatable="false">imperial</string>
     <string name="action_show_location">Show Location</string>
 
 </resources>
