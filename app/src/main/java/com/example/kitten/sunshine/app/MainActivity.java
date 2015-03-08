@@ -55,8 +55,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void showLocation() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String zipcode = preferences.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
+        String zipcode = Utility.getPreferredLocation(this);
         Uri geolocation = Uri.parse("geo:0,0?").buildUpon()
                 .appendQueryParameter("q", zipcode)
                 .build();
