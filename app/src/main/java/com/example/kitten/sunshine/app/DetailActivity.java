@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,8 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.ShareActionProvider;
-import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -57,7 +56,7 @@ public class DetailActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
         private ShareActionProvider mShareActionProvider;
-        private String mForecastString;
+        private String mForecastStr;
 
         public PlaceholderFragment() {
         }
@@ -73,11 +72,9 @@ public class DetailActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.detail_text_view);
             Intent intent = getActivity().getIntent();
-            if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
-                mForecastString = intent.getStringExtra(Intent.EXTRA_TEXT);
-                textView.setText(mForecastString);
+            if (intent != null) {
+                mForecastStr = intent.getDataString();
             }
             return rootView;
         }
@@ -91,7 +88,7 @@ public class DetailActivity extends ActionBarActivity {
             // Fetch and store ShareActionProvider
             mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
             if(mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(shareIntent(mForecastString));
+                mShareActionProvider.setShareIntent(shareIntent(mForecastStr));
             } else {
                 Log.v("DetailActivity", "mShareActionProvider is null!!");
             }
