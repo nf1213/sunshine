@@ -1,10 +1,8 @@
 package com.example.kitten.sunshine.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,25 +69,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             return true;
         }
 
-        if (id == R.id.action_show_location) {
-          showLocation();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showLocation() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String zipcode = Utility.getPreferredLocation(this);
-        Uri geolocation = Uri.parse("geo:0,0?").buildUpon()
-                .appendQueryParameter("q", zipcode)
-                .build();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geolocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 
     @Override
